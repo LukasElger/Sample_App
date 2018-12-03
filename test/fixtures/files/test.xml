@@ -3,4 +3,24 @@
   <email>exammmple-4@railstutorial.org</email>
   <password>TestTest</password>
   <password_confirmation>TestTest</password_confirmation>
+  <microposts>
+    <micropost>
+      <content>
+        1Labore voluptatum sit doloremque nihil deserunt ipsa voluptas animi.
+      </content>
+      <created_at>2018-11-05 10:56:43 UTC</created_at>
+    </micropost>
+    <micropost>
+      <content>
+        2Labore voluptatum sit doloremque nihil deserunt ipsa voluptas animi.
+      </content>
+      <created_at>2018-11-05 10:56:43 UTC</created_at>
+    </micropost>
+    <micropost>
+      <content>
+        3Labore voluptatum sit doloremque nihil deserunt ipsa voluptas animi.
+      </content>
+      <created_at>2018-11-05 10:56:43 UTC</created_at>
+    </micropost>
+  </microposts>
 </user>

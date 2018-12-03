@@ -109,4 +109,10 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "users microposts should be loaded and saved from xml file" do
+    assert_difference 'Micropost.count', 3 do
+      User.create_from_xml(Rails.root.join("test/fixtures/files/test.xml"))
+    end
+  end
+
 end

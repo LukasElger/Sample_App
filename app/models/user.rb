@@ -141,8 +141,10 @@ class User < ApplicationRecord
 
     u = User.new(name: name, email: email,
             password: pssw1, password_confirmation: pssw2)
-
     u.save
+    xml.css("user").css("microposts").css("micropost").each do |micro_xml|
+      micro = Micropost.create_from_xml(u, micro_xml)
+    end
   end
 
   private

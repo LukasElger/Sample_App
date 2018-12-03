@@ -6,11 +6,9 @@ class Micropost < ApplicationRecord
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
 
-  def xml_data(xml)
-    xml.micropost {
-      xml.content self.content
-      xml.created_at self.created_at
-    }
+  def self.create_from_xml(user, xml)
+    content = xml.css("content").text
+    Micropost.new(content: content, user_id: user.id).save
   end
 
   private
