@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  require 'nokogiri'
+
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                 foreign_key: "follower_id",
@@ -98,6 +100,49 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def to_xml
+    builder = Nokogiri::XML::Builder.new do |xml|
+      xml_data(xml)
+    end
+
+    builder.to_xml
+  end
+
+  def xml_data(xml)
+    xml.user {
+      xml.name self.name
+      xml.email self.email
+      xml.created_at self.created_at
+      xml.admin self.admin
+      xml.microposts {
+        microposts.each do |post|
+          post.xml_data(xml)
+        end
+      }
+      xml.followers {
+        followers.each do |user|
+          xml.follower {
+            xml.name user.name
+            xml.email user.email
+          }
+        end
+      }
+    }
+  end
+
+  def self.create_from_xml(file)
+    xml = Nokogiri::XML(File.open(file))
+    name = xml.css("user").css("name").text
+    email = xml.css("user").css("email").text
+    pssw1 = xml.css("user").css("password").text
+    pssw2 = xml.css("user").css("password_confirmation").text
+
+    u = User.new(name: name, email: email,
+            password: pssw1, password_confirmation: pssw2)
+
+    u.save
   end
 
   private

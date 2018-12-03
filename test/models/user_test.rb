@@ -97,4 +97,16 @@ class UserTest < ActiveSupport::TestCase
       assert_not michael.feed.include?(post_unfollowed)
     end
   end
+
+  test "xml should include user name" do
+    xml = @user.to_xml
+    assert xml.include?(@user.name)
+  end
+
+  test "user should be loaded and saved from xml file" do
+    assert_difference 'User.count', 1 do
+      User.create_from_xml(Rails.root.join("test/fixtures/files/test.xml"))
+    end
+  end
+
 end

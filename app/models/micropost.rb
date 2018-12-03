@@ -6,6 +6,13 @@ class Micropost < ApplicationRecord
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
 
+  def xml_data(xml)
+    xml.micropost {
+      xml.content self.content
+      xml.created_at self.created_at
+    }
+  end
+
   private
 
     # Validates the size of an uploaded picture.

@@ -6,11 +6,31 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.xml {
+        builder = Nokogiri::XML::Builder.new do |xml|
+          xml.users {
+            @users.each do |user|
+              user.xml_data(xml)
+            end
+          }
+        end
+
+        render xml: builder.to_xml
+      }
+    end
   end
 
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.xml {
+        render xml: @user.to_xml
+      }
+    end
   end
 
   def new
