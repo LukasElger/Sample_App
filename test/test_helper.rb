@@ -4,6 +4,7 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   fixtures :all
+  include FactoryBot::Syntax::Methods
 
   # Returns true if a test user is logged in.
   def is_logged_in?
