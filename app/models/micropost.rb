@@ -11,6 +11,12 @@ class Micropost < ApplicationRecord
     Micropost.new(content: content, user_id: user.id).save
   end
 
+  def xml_data(xml)
+    xml.micropost {
+      xml.content self.content
+    }
+  end
+
   private
 
     # Validates the size of an uploaded picture.

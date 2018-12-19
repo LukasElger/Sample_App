@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
     respond_to do |format|
       format.html
+      format.xlsx {
+        @users = User.all
+      }
       format.xml {
         builder = Nokogiri::XML::Builder.new do |xml|
           xml.users {
