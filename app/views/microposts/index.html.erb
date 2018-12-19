@@ -1,0 +1,10 @@
+<% provide(:title, 'All microposts') %>
+<h1>All microposts</h1>
+
+<ul class="microposts">
+  <% @microposts.each do |micropost| %>
+    <%= render micropost %>
+  <% end %>
+</ul>
+
+<%= will_paginate %>
