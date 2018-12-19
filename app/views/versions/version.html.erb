@@ -1,0 +1,19 @@
+<h4>Total: <%= @items.count %></h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Event</th>
+      <th scope="col">When</th>
+      <th scope="col">Who</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <th><%= item.event %></th>
+        <th><%= item.created_at %></th>
+        <th><%= item.whodunnit %></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

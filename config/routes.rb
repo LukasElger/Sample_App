@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  get "versions/:item_type/:item_id" => "versions#version", as: :versions
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
