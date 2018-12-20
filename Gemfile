@@ -22,6 +22,7 @@ gem 'pdf-forms'
 gem 'draper'
 gem 'paper_trail'
 gem 'acts-as-taggable-on', '~> 6.0'
+gem "paperclip", "~> 6.0.0"
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

@@ -1,10 +1,9 @@
-#/versions/user/101
-
 class User < ApplicationRecord
   has_paper_trail
   require 'nokogiri'
-
-  has_many :microposts, dependent: :destroy
+  has_many :microposts
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                 foreign_key: "follower_id",
                                 dependent:   :destroy
